@@ -1,0 +1,45 @@
+﻿@model List<LRSP_Parallel.Models.SiteModel>
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="row">
+    @if (ViewBag.IsUsingParallel)
+    {
+    <p>Example using Parallel</p>
+    }
+    else
+    {
+    <p>Example without Parallel</p>
+    }    
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Site</th>
+                <th>Online</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td><a href="@item.Url" target="_blank">@item.Title</a></td>
+                    <td>@(item.Online ? "Yes" : "No")</td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="2">Total time in milliseconds: @ViewBag.TotalTime</td>
+            </tr>
+        </tfoot>
+    </table>
+    @if (ViewBag.IsUsingParallel)
+    {
+    <a href="@Url.Action("WithoutParallel")">Open example without parallel</a>
+    }
+    else
+    {
+    <a href="@Url.Action("Index")">Open example using parallel</a>
+    }
+</div>
